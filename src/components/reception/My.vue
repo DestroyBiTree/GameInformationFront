@@ -40,6 +40,14 @@
             <button @click="searchDiscount">查询折扣</button>
           </template>
         </el-descriptions-item>
+
+        <el-descriptions-item>
+          <template slot="label">
+            <input type="text" v-model="userId" placeholder="请输入内容" />
+            <button @click="searchDiscountById">查询折扣</button>
+          </template>
+        </el-descriptions-item>
+
       </el-descriptions>
     </el-card>
     <!-- 操作部分 -->
@@ -57,12 +65,14 @@
 
 <script>
 import { discountAPI } from "@/api/discountAPI";
+import { discountByIdAPI } from "@/api/discountAPI";
 export default {
   name: "My",
   data() {
     return {
       userInfo: this.$store.state.userInfo,
       inputValue: "",
+      userId: ""
     };
   },
   methods: {
@@ -76,6 +86,15 @@ export default {
       } catch (error) {
         console.error("查询折扣信息出错:", error);
         // 可以在这里添加相应的提示给用户，比如使用 UI 框架的提示组件显示错误消息等
+      }
+    },
+    async searchDiscountById() {
+      try {
+        const userId = this.userId;
+        const response = await discountByIdAPI(userId);
+        this.discountList = response.data;
+      } catch (error) {
+        console.error("查询折扣信息出错:", error);
       }
     },
 
