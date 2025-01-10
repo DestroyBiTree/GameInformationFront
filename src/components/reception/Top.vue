@@ -1,7 +1,7 @@
 <template>
   <div class="top-content">
     <el-menu router :default-active="myPath" class="el-menu-welcome" mode="horizontal" background-color="#596275" text-color="#fff" active-text-color="#ffd04b">
-      <div class="logo" @click="gotoWelcome">XXX</div>
+      <div class="logo" @click="gotoWelcome">Bubble</div>
       <el-menu-item route="/welcome/index" index="/welcome/index" class="item">首页</el-menu-item>
       <el-menu-item route="/welcome/customize" index="/welcome/customize" class="item">定制</el-menu-item>
       <el-menu-item route="/welcome/my" index="/welcome/my" class="item">我的</el-menu-item>
