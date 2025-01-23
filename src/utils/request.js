@@ -6,8 +6,8 @@ import router from '@/router'
 
 // 创建axios对象，配置请求的根路径
 const instance = axios.create({
-  // baseURL: 'http://8.130.94.28:6060/api'
-  baseURL: 'http://localhost:8888'
+  baseURL: 'http://47.108.204.196:8888'
+  // baseURL: 'http://localhost:8888'
 })
 
 let loading = null;

@@ -39,7 +39,7 @@ export default {
   data: () => {
     return {
       // 验证码图片
-      codeImg: 'http://localhost:8888/users/code',
+      codeImg: 'http://47.108.204.196:8888/users/code',
       // 表单数据
       formData: {
         username: '',
@@ -77,7 +77,7 @@ export default {
     },
     // 切换验证码图片
     changeCodeImg() {
-      this.codeImg = 'http://localhost:8888/users/code?' + new Date().getMilliseconds()
+      this.codeImg = 'http://47.108.204.196:8888/users/code?' + new Date().getMilliseconds()
     },
     // 注册函数
     register(formData) {
