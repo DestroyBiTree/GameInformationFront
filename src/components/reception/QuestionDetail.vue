@@ -1,10 +1,10 @@
 <template>
   <div
     class="question-detail-content"
-    v-infinite-scroll="getQuestionsByPage"
+    v-infinite-scroll="loadMoreQuestions"
     infinite-scroll-distance="5"
   >
-    <el-card v-for="question in questions" :key="question.id" class="item">
+    <el-card v-for="question in displayQuestions" :key="question.id" class="item">
       <div class="el-descriptions__header">
         <div class="el-descriptions__title">问题： {{ question.content }}</div>
       </div>
@@ -19,52 +19,72 @@
         点我查看专属旅游策划
       </div>
     </el-card>
+    <div v-if="displayQuestions.length === 0" class="no-data">
+      <el-empty description="暂无问题数据"></el-empty>
+    </div>
   </div>
 </template>
 
 <script>
-import { getQuestionsByPageAPI } from "@/api/question";
+import { getQuestionsByUserIdAPI } from "@/api/question";
 export default {
-  namne: "QuestionDetail",
+  name: "QuestionDetail",
   data() {
     return {
-      questions: [],
+      allQuestions: [], // 所有问题
+      displayQuestions: [], // 当前显示的问题
       userID: this.$store.state.userInfo.userID,
       pagination: {
         currentPage: 0,
         pageSize: 3,
-        // 总页数
-        pages: "",
         total: 0,
       },
     };
   },
   methods: {
-    async getQuestionsByPage() {
+    async getUserQuestions() {
+      try {
+        const { data: res } = await getQuestionsByUserIdAPI(this.userID);
+        if (res.code !== 200) {
+          this.$message({ message: res.msg, type: "error" });
+          return;
+        }
+        this.allQuestions = res.data || [];
+        this.pagination.total = this.allQuestions.length;
+        this.loadMoreQuestions();
+      } catch (error) {
+        this.$message({ message: "获取问题列表失败", type: "error" });
+      }
+    },
+    loadMoreQuestions() {
       // 判断还有没有数据
-      if (this.pagination.pages === this.pagination.currentPage) return;
+      const maxPage = Math.ceil(this.pagination.total / this.pagination.pageSize);
+      if (this.pagination.currentPage >= maxPage) return;
+      
       // 当前页面 +1
       this.pagination.currentPage++;
-      const { data: res } = await getQuestionsByPageAPI(
-        this.userID,
-        this.pagination.currentPage,
-        this.pagination.pageSize
-      );
-      if (res.code !== 200)
-        return this.$message({ message: res.msg, type: "error" });
-      this.questions.push(...res.data.plannings);
-      this.pagination.total = res.data.total;
-      this.pagination.pages = res.data.pages;
+      
+      // 计算当前页面应该显示的数据
+      const startIndex = (this.pagination.currentPage - 1) * this.pagination.pageSize;
+      const endIndex = startIndex + this.pagination.pageSize;
+      const newQuestions = this.allQuestions.slice(startIndex, endIndex);
+      
+      this.displayQuestions.push(...newQuestions);
     },
     gotoDetail(question) {
-      this.$router.push({
-        path: "/detail",
-        query: { id: question.answer.id, title: question.answer.theme },
-      });
+      // 这里需要根据实际的数据结构调整，可能需要查询对应的旅游策略
+      if (question.answer && question.answer.id) {
+        this.$router.push({
+          path: "/detail",
+          query: { id: question.answer.id, title: question.answer.theme },
+        });
+      } else {
+        this.$message({ message: "暂无对应的旅游策划", type: "info" });
+      }
     },
   },
   created() {
-    this.getQuestionsByPage();
+    this.getUserQuestions();
   },
 };
 </script>
@@ -87,6 +107,10 @@ export default {
     .unreplay {
       color: #ccc;
     }
+  }
+  .no-data {
+    text-align: center;
+    margin-top: 2rem;
   }
 }
 </style>

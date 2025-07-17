@@ -34,20 +34,6 @@
           >
           功能开发中...
         </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <input type="text" v-model="inputValue" placeholder="请输入内容" />
-            <button @click="searchDiscount">查询折扣</button>
-          </template>
-        </el-descriptions-item>
-
-        <el-descriptions-item>
-          <template slot="label">
-            <input type="text" v-model="userId" placeholder="请输入内容" />
-            <button @click="searchDiscountById">查询折扣</button>
-          </template>
-        </el-descriptions-item>
-
       </el-descriptions>
     </el-card>
     <!-- 操作部分 -->
@@ -64,40 +50,14 @@
 </template>
 
 <script>
-import { discountAPI } from "@/api/discountAPI";
-import { discountByIdAPI } from "@/api/discountAPI";
 export default {
   name: "My",
   data() {
     return {
-      userInfo: this.$store.state.userInfo,
-      inputValue: "",
-      userId: ""
+      userInfo: this.$store.state.userInfo
     };
   },
   methods: {
-    async searchDiscount() {
-      try {
-        // 假设这里的参数 userName 你从某个地方获取，比如用户输入框等，此处先简单写个固定值示例
-        const userName = this.inputValue;
-        const response = await discountAPI(userName);
-        // 一般后端接口返回的数据结构可能有 data 属性包含实际数据，这里根据实际情况调整
-        this.discountList = response.data;
-      } catch (error) {
-        console.error("查询折扣信息出错:", error);
-        // 可以在这里添加相应的提示给用户，比如使用 UI 框架的提示组件显示错误消息等
-      }
-    },
-    async searchDiscountById() {
-      try {
-        const userId = this.userId;
-        const response = await discountByIdAPI(userId);
-        this.discountList = response.data;
-      } catch (error) {
-        console.error("查询折扣信息出错:", error);
-      }
-    },
-
     // 修改用户信息
     updateUserInfo() {
       // TODO后面实现

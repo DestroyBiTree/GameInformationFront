@@ -1,35 +1,36 @@
 <template>
-  <div class="plan-content" @click="gotoDetail">
-    <div class="theme">主题：{{plan.theme}}</div>
-    <div class="location">地点：{{plan.location}}</div>
-    <div class="budget">预算：{{plan.budget}}</div>
-    <div class="itinerary">行程安排：{{plan.itinerary}}</div>
+  <div class="game-content" @click="gotoDetail">
+    <div class="title">游戏名称：{{game.title}}</div>
+    <div class="platform">游戏平台：{{game.platform}}</div>
+    <div class="genre">游戏类型：{{game.genre}}</div>
+    <div class="rating">评分：{{game.rating}}/10</div>
+    <div class="description">游戏描述：{{game.description}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'plan',
+  name: 'Game',
   props: {
-    plan: {
+    game: {
       required: true,
       type: Object
     }
   },
   methods: {
     gotoDetail() {
-      const { href } = this.$router.resolve({ path: '/detail', query: { id: this.plan.id, title: this.plan.theme } })
+      const { href } = this.$router.resolve({ path: '/detail', query: { id: this.game.id, title: this.game.title } })
       window.open(href, '_blank')
     }
   }
 }
 </script>
 
-<style lang='scss' scope>
-.plan-content {
+<style lang='scss' scoped>
+.game-content {
   cursor: pointer;
   padding: 15px;
-  .theme {
+  .title {
     font-size: 1.25rem;
     font-weight: 700;
     margin: 10px 0 20px 0;
@@ -39,11 +40,15 @@ export default {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
-  .budget {
+  .platform, .genre, .rating {
     font-size: 1rem;
     margin: 10px 0;
   }
-  .itinerary {
+  .rating {
+    font-weight: 600;
+    color: #007bff;
+  }
+  .description {
     font-size: 1rem;
     margin: 10px 0;
     overflow: hidden;
@@ -53,4 +58,4 @@ export default {
     -webkit-box-orient: vertical;
   }
 }
-</style>
+</style> 

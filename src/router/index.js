@@ -23,23 +23,23 @@ Vue.use(VueRouter)
 const routes = [
   // 带有 name 名称的路由规则，叫做"命名路由"
   { path: '/', redirect: '/login' },
-  { path: '/login', component: Login, name: 'login', meta: { title: '登录' } },
+  { path: '/login', component: Login, name: 'login', meta: { title: '登录 - 游戏信息管理' } },
   // 注册页面
-  { path: '/register', component: Register, name: 'register', meta: { title: '注册' } },
+  { path: '/register', component: Register, name: 'register', meta: { title: '注册 - 游戏信息管理' } },
   {
     path: '/welcome', component: Welcome, name: 'welcome', redirect: '/welcome/index',
     children: [
-      { path: 'index', component: Index, name: 'index', meta: { title: '首页' } },
-      { path: 'customize', component: Customize, name: 'customize', meta: { title: '定制' } },
-      { path: 'my', component: My, name: 'my', meta: { title: '我的' } },
+      { path: 'index', component: Index, name: 'index', meta: { title: '游戏库 - 我的游戏收藏' } },
+      { path: 'customize', component: Customize, name: 'customize', meta: { title: '游戏推荐 - 寻找新游戏' } },
+      { path: 'my', component: My, name: 'my', meta: { title: '我的游戏记录' } },
     ]
   },
-  { path: '/detail', component: Detail, name: 'detail' },
-  { path: '/questiondetail', component: QuestionDetail, name: 'questiondetail', meta: { title: '我的-定制' } },
+  { path: '/detail', component: Detail, name: 'detail', meta: { title: '游戏详情' } },
+  { path: '/questiondetail', component: QuestionDetail, name: 'questiondetail', meta: { title: '游戏推荐详情' } },
   {
     path: '/home', component: Home, redirect: '/home/user',
     children: [
-      { path: 'user', component: User, name: 'user', meta: { title: '用户管理' } },
+      { path: 'user', component: User, name: 'user', meta: { title: '用户管理 - 游戏信息管理后台' } },
     ]
   },
 ]

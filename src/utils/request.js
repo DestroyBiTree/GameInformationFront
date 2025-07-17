@@ -6,8 +6,8 @@ import router from '@/router'
 
 // 创建axios对象，配置请求的根路径
 const instance = axios.create({
-  baseURL: 'http://47.108.204.196:8888'
-  // baseURL: 'http://localhost:8888'
+  // baseURL: 'http://47.108.204.196:8888'
+  baseURL: 'http://localhost:8888'
 })
 
 let loading = null;
@@ -41,9 +41,22 @@ instance.interceptors.response.use(
   response => {
     // 隐藏 loading 效果
     loading.close();
+    
+    // 统一处理响应数据格式
+    if (response.data) {
+      // 将新的BaseResponse格式适配为前端期望的格式
+      if (response.data.message !== undefined && response.data.msg === undefined) {
+        response.data.msg = response.data.message;
+      }
+    }
+    
     return response
   },
   error => {
+    // 隐藏 loading 效果
+    if (loading) {
+      loading.close();
+    }
     return Promise.reject(error)
   }
 )

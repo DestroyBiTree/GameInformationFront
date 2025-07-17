@@ -1,62 +1,63 @@
 <template>
   <div class="detail-content" v-title :data-title='this.$route.query.title'>
     <!-- 内容 -->
-    <el-card class="plans-box">
-      <div class="plan-theme-box" id="theme">{{plan.theme}}</div>
-      <div class="plan-location-box item">地点：{{plan.location}}</div>
-      <div class="plan-hotel-box item">酒店：{{plan.hotel}}</div>
-      <div class="plan-budget-box item">预算：{{plan.budget}}</div>
+    <el-card class="game-box">
+      <div class="game-title-box" id="title">{{game.title}}</div>
+      <div class="game-platform-box item">游戏平台：{{game.platform}}</div>
+      <div class="game-genre-box item">游戏类型：{{game.genre}}</div>
+      <div class="game-rating-box item">评分：{{game.rating}}/10</div>
       <hr>
-      <div class="plan-itinerary-box item" ref="plan" v-html="plan.itinerary"></div>
+      <div class="game-description-box item" ref="game" v-html="game.description"></div>
     </el-card>
     <!-- 跳转 -->
-    <a href="#theme" class="top">↑</a>
+    <a href="#title" class="top">↑</a>
   </div>
 </template>
 
 <script>
-import { getplanByIdAPI } from '@/api/planAPI'
+import { getGameById } from '@/api/gameAPI'
 export default {
-  name: 'Detail',
+  name: 'GameDetail',
   data() {
     return {
-      plan: {}
+      game: {}
     }
   },
   methods: {
-    async getplanById(id) {
-      const { data: res } = await getplanByIdAPI(id)
-      this.plan = res.data
+    async getGameByIdData(id) {
+      const { data: res } = await getGameById(id)
+      this.game = res.data
     }
   },
   created() {
-    this.getplanById(this.$route.query.id)
+    this.getGameByIdData(this.$route.query.id)
   }
 }
 </script>
 
-<style lang='scss' scope>
+<style lang='scss' scoped>
 .detail-content {
   margin-top: 60px;
   word-wrap: break-word;
-  .plans-box {
+  .game-box {
     width: 80%;
     margin: auto;
-    .plan-theme-box {
+    .game-title-box {
       text-align: center;
       padding: 20px;
       font-size: 26px;
-      color: #ee5253;
+      color: #007bff;
+      font-weight: bold;
     }
     .item {
       padding: 0.625rem;
       font-size: 1.125rem;
     }
+    .game-rating-box {
+      color: #007bff;
+      font-weight: 600;
+    }
   }
-  /* img {
-    max-width: 100%;
-    border-radius: 0.3125rem;
-  } */
   .top {
     position: fixed;
     bottom: 50px;

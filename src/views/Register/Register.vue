@@ -39,7 +39,7 @@ export default {
   data: () => {
     return {
       // 验证码图片
-      codeImg: 'http://47.108.204.196:8888/users/code',
+      codeImg: '/users/code',
       // 表单数据
       formData: {
         username: '',
@@ -77,7 +77,8 @@ export default {
     },
     // 切换验证码图片
     changeCodeImg() {
-      this.codeImg = 'http://47.108.204.196:8888/users/code?' + new Date().getMilliseconds()
+      const baseURL = this.$axios.defaults.baseURL || 'http://localhost:8888'
+      this.codeImg = `${baseURL}/users/code?t=${Date.now()}`
     },
     // 注册函数
     register(formData) {
@@ -113,6 +114,9 @@ export default {
     toLogin() {
       this.$router.push('/login')
     }
+  },
+  mounted() {
+    this.changeCodeImg()
   }
 }
 </script>

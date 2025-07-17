@@ -5,7 +5,12 @@ export const addQuestionAPI = question => {
   return axios.post('/questions', question)
 }
 
-// 分页查询提问
-export const getQuestionsByPageAPI = (id, currentPage, pageSize) => {
-  return axios.get(`/questions/${id}/${currentPage}/${pageSize}`)
+// 分页查询所有问题
+export const getQuestionsByPageAPI = (currentPage, pageSize) => {
+  return axios.get(`/questions/${currentPage}/${pageSize}`)
+}
+
+// 根据用户ID查询问题
+export const getQuestionsByUserIdAPI = userId => {
+  return axios.get(`/questions/user/${userId}`)
 }
