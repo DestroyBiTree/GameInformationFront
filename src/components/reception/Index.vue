@@ -1,20 +1,20 @@
 <template>
   <div class="index-content">
-    <!-- 文章列表 -->
-    <plan-card :plans="plans" :currentPage="this.pagination.currentPage" :pageSize="this.pagination.pageSize" :total="this.pagination.total" v-on:current-change="handleCurrentChange"></plan-card>
+    <!-- 游戏列表 -->
+    <game-list :games="games" :currentPage="this.pagination.currentPage" :pageSize="this.pagination.pageSize" :total="this.pagination.total" v-on:current-change="handleCurrentChange"></game-list>
   </div>
 </template>
 
 <script>
-import PlanCard from './PlanCard.vue'
-import { getPlansByPageAPI } from '@/api/planAPI'
+import GameList from './GameList.vue'
+import { getGamesByPage } from '@/api/gameAPI'
 export default {
-  components: { PlanCard },
-  name: 'BlogIndex',
+  components: { GameList },
+  name: 'GameIndex',
   data() {
     return {
-      // 旅游策划
-      plans: [],
+      // 游戏列表
+      games: [],
       pagination: {
         currentPage: 1,
         pageSize: 7,
@@ -23,27 +23,23 @@ export default {
     }
   },
   methods: {
-    async getPlansByPage() {
-      const { data: res } = await getPlansByPageAPI(this.pagination.currentPage, this.pagination.pageSize)
-      this.plans = res.data.plannings
+    async getGamesByPageData() {
+      const { data: res } = await getGamesByPage(this.pagination.currentPage, this.pagination.pageSize)
+      this.games = res.data.games
       this.pagination.total = res.data.total
     },
     handleCurrentChange(currentPage) {
       this.pagination.currentPage = currentPage
-      this.getPlansByPage()
+      this.getGamesByPageData()
     }
-    /* gotoDetail(article) {
-      const { href } = this.$router.resolve({ path: '/detail', query: { id: article.id, title: article.title } })
-      window.open(href, '_blank')
-    } */
   },
   created() {
-    this.getPlansByPage()
+    this.getGamesByPageData()
   }
 }
 </script>
 
-<style lang='scss' scope>
+<style lang='scss' scoped>
 .index-content {
   margin-top: 60px;
   display: flex;

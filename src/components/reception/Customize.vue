@@ -7,11 +7,11 @@
     <!-- 表格 -->
     <el-card class="form-card">
       <div slot="header" class="clearfix">
-        <span>定制旅游策略</span>
+        <span>游戏推荐咨询</span>
       </div>
       <el-form ref="formData" :rules="rules" :model="formData">
         <el-form-item prop="content">
-          <el-input class="textarea-input" ref="textarea" type="textarea" :autosize="{ minRows: 4}" placeholder="例如：我想去杭州旅游三天两夜，预算2000左右，请问有什么好的安排吗？" resize="none" v-model.trim="formData.content">
+          <el-input class="textarea-input" ref="textarea" type="textarea" :autosize="{ minRows: 4}" placeholder="例如：我喜欢开放世界的冒险游戏，有什么好推荐吗？或者：我想找一些适合Switch平台的多人游戏，有什么建议？" resize="none" v-model.trim="formData.content">
           </el-input>
         </el-form-item>
         <div class="form">
@@ -29,13 +29,13 @@ export default {
   name: 'Customize',
   data() {
     return {
-      msg: '根据您的需要，我们将为您定制专属于您的旅游策划，具体答复可以在 "我的-操作-定制" 中进行查看',
+      msg: '根据您的游戏喜好和需求，我们将为您推荐适合的游戏，具体回复可以在 "我的游戏记录-操作-推荐咨询" 中进行查看',
       formData: {
         userID: this.$store.state.userInfo.userID,
         content: ''
       },
       rules: {
-        content: { required: true, message: '提问不能为空哦，亲~', trigger: 'blur' }
+        content: { required: true, message: '咨询内容不能为空哦，亲~', trigger: 'blur' }
       }
     }
   },
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .customize-content {
   margin-top: 60px;
   .tip {

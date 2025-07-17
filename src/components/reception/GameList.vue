@@ -1,27 +1,27 @@
 <template>
-  <div :style="{width:width}" class="plans-card-content">
-    <el-card v-if="plans.length!==0" class="plans-card">
-      <div v-for='item in plans' :key="item.id" class="plan-item">
-        <plan :plan="item"></plan>
+  <div :style="{width:width}" class="games-card-content">
+    <el-card v-if="games.length!==0" class="games-card">
+      <div v-for='item in games' :key="item.id" class="game-item">
+        <game :game="item"></game>
       </div>
       <div class="bottom">
         <el-pagination @current-change="currentChange" :current-page="currentPage" :page-size="pageSize" :total="total" class="pagination" background layout="prev, next">
         </el-pagination>
       </div>
     </el-card>
-    <el-card v-else class="plans-card">
-      <el-empty description="暂无数据"></el-empty>
+    <el-card v-else class="games-card">
+      <el-empty description="暂无游戏数据"></el-empty>
     </el-card>
   </div>
 </template>
 
 <script>
-import Plan from './Plan.vue'
+import Game from './Game.vue'
 export default {
-  components: { Plan },
-  name: 'plansCard',
+  components: { Game },
+  name: 'gamesList',
   props: {
-    plans: {
+    games: {
       required: true,
       type: Array
     },
@@ -50,8 +50,8 @@ export default {
 }
 </script>
 
-<style lang='scss' scope>
-.plans-card {
+<style lang='scss' scoped>
+.games-card {
   .bottom {
     height: 2.1875rem;
     position: relative;
@@ -62,5 +62,12 @@ export default {
       transform: translateX(-50%);
     }
   }
+  
+  .game-item {
+    border-bottom: 1px solid #f0f0f0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
-</style>
+</style> 
