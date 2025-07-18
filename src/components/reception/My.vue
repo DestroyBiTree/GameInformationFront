@@ -43,7 +43,6 @@
       </div>
       <div class="main">
         <el-tag class="item" @click="logout">退出登录</el-tag>
-        <el-tag class="item" @click="toQuestionDetail">定制</el-tag>
       </div>
     </el-card>
   </div>
@@ -63,11 +62,7 @@ export default {
       // TODO后面实现
       this.$message("功能开发中，敬请期待...");
     },
-    // 去用户的提问详情页
-    toQuestionDetail() {
-      const { href } = this.$router.resolve("/questiondetail");
-      window.open(href, "_blank");
-    },
+
     // 退出登录
     logout() {
       localStorage.setItem("state", JSON.stringify({}));

@@ -1,7 +1,7 @@
 <template>
   <div class="blog-bottom-content">
     <div class="box">
-      <p class="Copyright">Copyright © 2023 - <span>{{year}} Designed by XXX</span></p>
+      <p class="Copyright">Copyright © 2024 - <span>{{year}} Designed by BubbleFox</span></p>
       <!-- <p class="record-no"><a href="http://icp.chinaz.com/home/info?host=xiongsihao.com">赣ICP备20000310号</a></p> -->
     </div>
   </div>

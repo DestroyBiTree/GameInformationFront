@@ -6,6 +6,8 @@
     </div>
     <!-- 主体 -->
     <el-main class="home-main-body">
+      <!-- 如果不希望首页每次都刷新数据，可以改为： -->
+      <!-- <keep-alive exclude="GameIndex"> -->
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
