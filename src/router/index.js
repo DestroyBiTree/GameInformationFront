@@ -9,7 +9,7 @@ const Index = () => import('@/components/reception/Index.vue')
 const Detail = () => import('@/components/reception/Detail.vue')
 const Customize = () => import('@/components/reception/Customize.vue')
 const My = () => import('@/components/reception/My.vue')
-const QuestionDetail = () => import('@/components/reception/QuestionDetail.vue')
+
 const User = () => import('@/components/system/User.vue')
 
 const originalPush = VueRouter.prototype.push
@@ -30,12 +30,11 @@ const routes = [
     path: '/welcome', component: Welcome, name: 'welcome', redirect: '/welcome/index',
     children: [
       { path: 'index', component: Index, name: 'index', meta: { title: '游戏库 - 我的游戏收藏' } },
-      { path: 'customize', component: Customize, name: 'customize', meta: { title: '游戏推荐 - 寻找新游戏' } },
+      { path: 'customize', component: Customize, name: 'customize', meta: { title: '内容管理 - 首页游戏管理' } },
       { path: 'my', component: My, name: 'my', meta: { title: '我的游戏记录' } },
     ]
   },
   { path: '/detail', component: Detail, name: 'detail', meta: { title: '游戏详情' } },
-  { path: '/questiondetail', component: QuestionDetail, name: 'questiondetail', meta: { title: '游戏推荐详情' } },
   {
     path: '/home', component: Home, redirect: '/home/user',
     children: [
@@ -52,7 +51,7 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const paths = ['/welcome/index', '/welcome/customize', '/welcome/my', '/detail', '/questiondetail']
+  const paths = ['/welcome/index', '/welcome/customize', '/welcome/my', '/detail']
   if (to.meta.title) {
     document.title = to.meta.title
   }

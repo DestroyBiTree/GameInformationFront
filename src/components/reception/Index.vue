@@ -35,6 +35,10 @@ export default {
   },
   created() {
     this.getGamesByPageData()
+  },
+  // 当组件被keep-alive缓存后重新激活时，重新获取数据
+  activated() {
+    this.getGamesByPageData()
   }
 }
 </script>

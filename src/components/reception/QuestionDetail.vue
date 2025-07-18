@@ -16,7 +16,7 @@
         class="replay"
         @click="gotoDetail(question)"
       >
-        点我查看专属旅游策划
+        点我查看推荐游戏
       </div>
     </el-card>
     <div v-if="displayQuestions.length === 0" class="no-data">
@@ -72,14 +72,14 @@ export default {
       this.displayQuestions.push(...newQuestions);
     },
     gotoDetail(question) {
-      // 这里需要根据实际的数据结构调整，可能需要查询对应的旅游策略
+      // 这里需要根据实际的数据结构调整，可能需要查询对应的推荐游戏
       if (question.answer && question.answer.id) {
         this.$router.push({
           path: "/detail",
-          query: { id: question.answer.id, title: question.answer.theme },
+          query: { id: question.answer.id, title: question.answer.title },
         });
       } else {
-        this.$message({ message: "暂无对应的旅游策划", type: "info" });
+        this.$message({ message: "暂无对应的推荐游戏", type: "info" });
       }
     },
   },
