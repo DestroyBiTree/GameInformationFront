@@ -5,6 +5,7 @@
       <el-menu-item route="/welcome/index" index="/welcome/index" class="item">首页</el-menu-item>
       <el-menu-item route="/welcome/customize" index="/welcome/customize" class="item">内容管理</el-menu-item>
       <el-menu-item route="/welcome/my" index="/welcome/my" class="item">我的</el-menu-item>
+      <el-menu-item route="/welcome/weather-config" index="/welcome/weather-config" class="item">天气配置</el-menu-item>
     </el-menu>
   </div>
 </template>

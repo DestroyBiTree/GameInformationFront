@@ -9,6 +9,7 @@ const Index = () => import('@/components/reception/Index.vue')
 const Detail = () => import('@/components/reception/Detail.vue')
 const Customize = () => import('@/components/reception/Customize.vue')
 const My = () => import('@/components/reception/My.vue')
+const WeatherConfig = () => import('@/components/reception/WeatherConfig.vue')
 
 const User = () => import('@/components/system/User.vue')
 
@@ -32,6 +33,7 @@ const routes = [
       { path: 'index', component: Index, name: 'index', meta: { title: '游戏库 - 我的游戏收藏' } },
       { path: 'customize', component: Customize, name: 'customize', meta: { title: '内容管理 - 首页游戏管理' } },
       { path: 'my', component: My, name: 'my', meta: { title: '我的游戏记录' } },
+      { path: 'weather-config', component: WeatherConfig, name: 'weather-config', meta: { title: '天气配置管理' } },
     ]
   },
   { path: '/detail', component: Detail, name: 'detail', meta: { title: '游戏详情' } },
